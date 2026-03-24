@@ -4,6 +4,8 @@ import HomePage from '../pages/home.page';
 test.describe('Home', () => {
     let homePage: HomePage;
 
+    test.use({ storageState: 'notLoggedInState.json' });
+
     test.beforeEach(async ({ context, page }) => {
         homePage = new HomePage(page);
         //заблокувала рекламу
@@ -75,6 +77,7 @@ test.describe('Home', () => {
     })
 
     test('Verify text of all nav links', async ({ page }) => {
+
         const expectedLinks = [
             "Home",
             "Products",
@@ -86,9 +89,10 @@ test.describe('Home', () => {
             "Contact us"
         ]
 
-        // await page.goto('https://www.automationexercise.com/');
-        await homePage.navigateToHomePage();
+        await page.goto("/");
 
-        expect(homePage.getNavBarText()).toEqual(expectedLinks[1]);
+        const actualLinks = await homePage.getNavBarText();
+
+        expect(actualLinks[1]).toEqual(expectedLinks[1]);
     })
 })
