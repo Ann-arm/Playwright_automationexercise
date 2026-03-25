@@ -6,7 +6,7 @@ async function globalSetup(config: FullConfig) {
     // Встановлюємо testId атрибут глобально для selectors
     selectors.setTestIdAttribute('data-qa');
 
-    const browser = await chromium.launch({ headless: false });
+    const browser = await chromium.launch({ headless: true });
     const context = await browser.newContext({
         baseURL: 'https://www.automationexercise.com'
     });
